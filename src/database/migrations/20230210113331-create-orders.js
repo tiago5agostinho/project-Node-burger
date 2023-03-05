@@ -6,6 +6,7 @@ module.exports = {
       userId: {
         type: Sequelize.STRING,
         allowNull: false,
+        primaryKey: true,
       },
       userName: {
         type: Sequelize.STRING,
@@ -14,6 +15,7 @@ module.exports = {
 
       product: {
         type: Sequelize.ARRAY(Sequelize.STRING),
+        allowNull: false,
         default: [
           {
             id: {
