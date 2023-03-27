@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import Category from '../models/Category'
 import Product from '../models/Products'
-import Order from '../models/Order'
+import Orders from '../models/Orders'
 
 class OrderController {
   async store(request, response) {
@@ -62,9 +62,20 @@ class OrderController {
       status: 'pedido realizado',
     }
 
-    const orderResponse = await Order.create(order)
+    const saveOrder = {
+      userId: request.userId,
+      userName: request.userName,
+      productId: editedProduct.id,
+      productName: editedProduct.name,
+      productPrice: editedProduct.price,
+      productUrl: editedProduct.url,
+      productQuantify: editedProduct.quantity,
+      status: 'pedido realizado',
+    }
 
-    return response.status(201).json(orderResponse)
+    await Orders.create(saveOrder)
+
+    return response.status(201).json(order)
   }
 }
 
